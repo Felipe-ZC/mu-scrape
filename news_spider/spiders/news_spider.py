@@ -1,7 +1,8 @@
 import scrapy
 
-#TODO: Follow links 
-
+#TODO: Accept args for page limit and offset. 
+#TODO: Start thinking about pitchfork, subpop scraping strategy.
+s
 class NewsSpider(scrapy.Spider):
     name = "news"
     start_urls = ['https://capturedtracks.com/news/']

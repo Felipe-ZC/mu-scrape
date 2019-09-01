@@ -1,13 +1,13 @@
 # mu-scrapoe
 
-###### Avoid getting banned
+#### Avoid getting banned
 
 From the scrapy docs:
 
-Some websites implement certain measures to prevent bots from crawling them,
+>Some websites implement certain measures to prevent bots from crawling them,
 with varying degrees of sophistication. Getting around those measures can be
 difficult and tricky, and may sometimes require special infrastructure. 
-
+>
 > Here are some tips to keep in mind when dealing with these kinds of sites:
 >    * rotate your user agent from a pool of well-known ones from browsers (google around to get a list of them)
 >    * disable cookies (see COOKIES_ENABLED) as some sites may use cookies to spot bot behaviour

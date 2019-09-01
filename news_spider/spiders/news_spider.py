@@ -20,9 +20,14 @@ class NewsSpider(scrapy.Spider):
             print(item.getall())
             counter = counter + 1
             # print(item.xpath('.//header').getall())
+            #TODO: xpath: .// vs //
             yield {
                 "title" :item.xpath('.//header/a/h1/text()').get(),
                 "date" : item.xpath('.//header/a/time/text()').get(),
                 "preview" : item.xpath('.//div[@class="news-item--preview"]/p/text()').get(),
             }
         print('------------- Done parsing -------------')
+        next_page = response.xpath('//div[@class="wrapper"]/a/@href').get()
+        if next_page:
+            yield response.follow(next_page, callback=self.parse)
+

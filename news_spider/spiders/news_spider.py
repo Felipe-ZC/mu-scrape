@@ -1,5 +1,7 @@
 import scrapy
 
+#TODO: Follow links 
+
 class NewsSpider(scrapy.Spider):
     name = "news"
     start_urls = ['https://capturedtracks.com/news/']

@@ -2,9 +2,11 @@ import scrapy
 
 #TODO: Accept args for page limit and offset. 
 #TODO: Start thinking about pitchfork, subpop scraping strategy.
-s
+
+#NOTE: Subpop and capturedtracks use the same scraping strategy. (/news/pageNum)
+
 class NewsSpider(scrapy.Spider):
-    name = "news"
+    name = "capturedTracks"
     start_urls = ['https://capturedtracks.com/news/']
     
     # Keep note of the strategies used for each website,

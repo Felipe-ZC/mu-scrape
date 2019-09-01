@@ -21,6 +21,6 @@ class NewsSpider(scrapy.Spider):
             yield {
                 "title" : item.xpath('.//header/a/h1/text()').get(),
                 "date" : item.xpath('.//header/a/time/text()').get(),
-                "preview" : item.xpath('.//div[@class="news-item--preview"]/p/text()').get(),
+                "preview" : item.xpath('.//div[@class="news-item--preview"]/p/text()').get().rstrip(),
             }
 

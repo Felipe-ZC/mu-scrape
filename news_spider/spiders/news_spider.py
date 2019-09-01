@@ -19,8 +19,8 @@ class NewsSpider(scrapy.Spider):
             counter = counter + 1
             # print(item.xpath('.//header').getall())
             yield {
-                "title" : item.xpath('.//header/a/h1/text()').get(),
+                "title" :item.xpath('.//header/a/h1/text()').get(),
                 "date" : item.xpath('.//header/a/time/text()').get(),
-                "preview" : item.xpath('.//div[@class="news-item--preview"]/p/text()').get().rstrip(),
+                "preview" : item.xpath('.//div[@class="news-item--preview"]/p/text()').get(),
             }
 

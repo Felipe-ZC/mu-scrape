@@ -16,7 +16,7 @@ class NewsSpider(scrapy.Spider):
         # print(data[0].getall())
         counter = 1
         for item in data:
-            print('------------- Parsing article #{} -------------'.format(counter))
+            print('------------- Parsing element {} -------------'.format(counter))
             print(item.getall())
             counter = counter + 1
             # print(item.xpath('.//header').getall())
@@ -25,4 +25,4 @@ class NewsSpider(scrapy.Spider):
                 "date" : item.xpath('.//header/a/time/text()').get(),
                 "preview" : item.xpath('.//div[@class="news-item--preview"]/p/text()').get(),
             }
-
+        print('------------- Done parsing -------------')

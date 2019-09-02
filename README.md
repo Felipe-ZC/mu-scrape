@@ -1,4 +1,4 @@
-# mu-scrapoe
+# mu-scrape
 
 #### Avoid getting banned
 

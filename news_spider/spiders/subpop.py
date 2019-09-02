@@ -22,8 +22,10 @@ class NewsSpider(scrapy.Spider):
             #TODO: xpath: .// vs //
             yield {
                 "title" :item.xpath('.//header/h2/a/text()').get(),
-                "date" : item.xpath('.//header/p/text()').getall(),
-                "preview" : item.xpath('./p/text()').getall(),
+                "date" : item.xpath('.//header/p/text()').getall(), 
+                # NOTE: There are <span> tags after some of the <p> elements for preview
+                # elements which our path is not accounting for. 
+                "preview" : item.xpath('./p/text() | ./ul/li/p/text()').getall(),
             }
         print('------------- Done parsing -------------')
         # next_page = response.xpath('//div[@class="wrapper"]/a/@href').get()

@@ -15,4 +15,5 @@ printf '\nDone\n'\
 #TODO: Why did ':%!python3 -m json.tool' work but not :%python3 -m json.tool'
 #TODO: Only run this command if the -f option is passed in to script...
 #TODO: Find out why this command messes up the encoding on FILE...
-#vim ${FILE} -c ':%!python3 -m json.tool'
+vim ${FILE} 
+#-c ':%!python3 -m json.tool'

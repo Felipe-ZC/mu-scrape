@@ -28,11 +28,11 @@ class NewsSpider(scrapy.Spider):
 
                 # TODO: Change this xpath to select any tag with a path ending in text()
                 # except for <div> and <header>.
-                # "preview" : item.xpath('./p/text() | ./ul/li/p/text()').getall()
+                #"preview" : item.xpath('./*[not(self::header)]').getall()
                 # descendant refers to all children, grandchildren etc. of the current node,
                 # in this case the current node is article. The xpath below selects all text
                 # node desecendants of an article tag. 
-                "preview" : item.xpath('./descendant::text()').getall(),
+                "preview" : item.xpath('./*[not(self::header)]/descendant::text()').getall(),
             }
         print('------------- Done parsing -------------')
         # next_page = response.xpath('//div[@class="wrapper"]/a/@href').get()

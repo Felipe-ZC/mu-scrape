@@ -28,18 +28,16 @@ class NewsSpider(scrapy.Spider):
                 "date" : ws.join(item.xpath('.//header/p/text()').getall()).replace(':', '').strip(), 
                 # NOTE: There are <span> tags after some of the <p> elements for preview
                 # elements which our path is not accounting for.
-
                 # TODO: Change this xpath to select any tag with a path ending in text()
                 # except for <div> and <header>.
-                #"preview" : item.xpath('./*[not(self::header)]').getall()
                 # descendant refers to all children, grandchildren etc. of the current node,
                 # in this case the current node is article. The xpath below selects all text
                 # node desecendants of an article tag.
                 # NOTE: This computation does not preserve the original structure of the text...
-                "preview" : ws.join(item.xpath('./*[not(self::header)]/descendant::text()').getall()),
+                "preview" : ws.join(item.xpath('./*[not(self::header)]/descendant::text()').getall()).strip(),
             }
         print('------------- Done parsing -------------')
-        # next_page = response.xpath('//div[@class="wrapper"]/a/@href').get()
-        # if next_page:
-            # yield response.follow(next_page, callback=self.parse)
+        next_page = response.xpath('//div[@class="pagination"]/span[@class="next"]/a/@href').get()
+        if next_page:
+            yield response.follow(next_page, callback=self.parse)
 

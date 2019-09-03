@@ -1,5 +1,15 @@
 # mu-scrape
 
+(Pretty vague)
+
+mu-scrape can be used to retrieve information from various music related websites.
+The information mu-scrape retrieves as of now is:
+
+- Previews of news articles 
+- WIP:
+	- Full news articles
+	- Artist names
+
 #### Avoid getting banned
 
 From the scrapy docs:

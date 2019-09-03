@@ -38,7 +38,7 @@ class NewsSpider(scrapy.Spider):
                 # "preview" : ws.join(item.xpath('./*[not(self::header)]/descendant::text()').getall()).strip(),
                 # NOTE: When using the pattern \\[rnt], python did not match the write strings (newline, carriage return, tab),
                 # using [\r\n\t] so as to search for an ASCII value. 
-                "preview" : [re.sub("[\r\n\t]", "", st) for st in item.xpath('./*[not(self::header)]/descendant::text()').getall()],
+                "preview" : ws.join([re.sub("[\r\n\t]", "", st) for st in item.xpath('./*[not(self::header)]/descendant::text()').getall()]),
             }
         print('------------- Done parsing -------------')
         next_page = response.xpath('//div[@class="pagination"]/span[@class="next"]/a/@href').get()

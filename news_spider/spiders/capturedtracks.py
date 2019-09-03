@@ -22,6 +22,7 @@ class NewsSpider(scrapy.Spider):
             #TODO: xpath: .// vs //
             yield {
                 "title" :item.xpath('.//header/a/h1/text()').get(),
+                # NOTE: Some articles do not feature the date in the header tag...
                 "date" : item.xpath('.//header/a/time/text()').get(),
                 "preview" : item.xpath('.//div[@class="news-item--preview"]/p/text()').get(),
             }

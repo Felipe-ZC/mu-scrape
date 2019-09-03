@@ -5,7 +5,7 @@
 BASE_DIR='/home/zubuddy/projects/mu_scrape/src/news_spider'
 NAME=$([ $# -eq 0 ] && echo test || echo $1) 
 DIR=$([ $# -le 1 ] && echo ${BASE_DIR}/news_spider/util/results || echo $2)
-FILE=${DIR}/${NAME}.json
+FILE=${DIR}/${NAME}.jl
 
 (rm ${FILE} || echo `No file named ${NAME} found`) && scrapy crawl subpop -o ${FILE}
 cat ${FILE}

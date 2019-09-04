@@ -6,7 +6,7 @@ import re
 
 #NOTE: Subpop and capturedtracks use the same scraping strategy. (/news/pageNum)
 
-class NewsSpider(scrapy.Spider):
+class SubpopSpider(scrapy.Spider):
     name = 'subpop'
     start_urls = ['https://www.subpop.com/news']
     
@@ -41,7 +41,7 @@ class NewsSpider(scrapy.Spider):
                 "preview" : ws.join([re.sub("[\r\n\t]", "", st) for st in item.xpath('./*[not(self::header)]/descendant::text()').getall()]),
             }
         print('------------- Done parsing -------------')
-        next_page = response.xpath('//div[@class="pagination"]/span[@class="next"]/a/@href').get()
-        if next_page:
-            yield response.follow(next_page, callback=self.parse)
+        # next_page = response.xpath('//div[@class="pagination"]/span[@class="next"]/a/@href').get()
+        # if next_page:
+            # yield response.follow(next_page, callback=self.parse)
 

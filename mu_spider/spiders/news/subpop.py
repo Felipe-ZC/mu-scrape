@@ -1,17 +1,15 @@
+#TODO: Accept args for page limit and offset. 
+
 import scrapy
 import re
 
-#TODO: Accept args for page limit and offset. 
-#TODO: Start thinking about pitchfork, subpop scraping strategy.
-
-#NOTE: Subpop and capturedtracks use the same scraping strategy. (/news/pageNum)
-
-class SubpopSpider(scrapy.Spider):
-    name = 'subpop'
-    start_urls = ['https://www.subpop.com/news']
+class SubpopSpider(scrapy.Spider):  
+    name = 'subpop' 
+    start_urls = ['https://www.subpop.com/news/']
     
-    # Keep note of the strategies used for each website,
-    # they'll change as we go along!
+    def __init__(self, follow=None, *args, **kwargs): 
+        super(SubpopSpider, self).__init__(*args, **kwargs)
+        self.follow = follow
     
     def parse(self, response):
         print('Parsing webpage...')
@@ -23,10 +21,12 @@ class SubpopSpider(scrapy.Spider):
             print(item.getall())
             #TODO: xpath: .// vs //
             yield {
+                #NOTE: Around page 371 all the dates are Auf 8th until the end where it changes to March
                 "title" :item.xpath('.//header/h2/a/text()').get(),
                 # TODO: Filter words that are not alpha numeric (escape sequences)
                 # TODO: Date is prefixed with a ':', lets get rid of it
-                "date" : ws.join(item.xpath('.//header/p/text()').getall()).replace(':', '').strip(), 
+                "date" : item.xpath('.//header/p/text()').getall(), 
+                #"date" : ws.join([re.sub("^:","", st.strip()) for st in item.xpath('.//header/p/text()').getall()]).strip(),
                 # NOTE: There are <span> tags after some of the <p> elements for preview
                 # elements which our path is not accounting for.
                 # TODO: Change this xpath to select any tag with a path ending in text()
@@ -41,7 +41,9 @@ class SubpopSpider(scrapy.Spider):
                 "preview" : ws.join([re.sub("[\r\n\t]", "", st) for st in item.xpath('./*[not(self::header)]/descendant::text()').getall()]),
             }
         print('------------- Done parsing -------------')
-        next_page = response.xpath('//div[@class="pagination"]/span[@class="next"]/a/@href').get()
-        if next_page:
-            yield response.follow(next_page, callback=self.parse)
+        #TODO: Add arg to enable/disable link following
+        if self.follow:
+            next_page = response.xpath('//div[@class="pagination"]/span[@class="next"]/a/@href').get()
+            if next_page:
+                yield response.follow(next_page, callback=self.parse)
 

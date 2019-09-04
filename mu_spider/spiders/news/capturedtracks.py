@@ -1,16 +1,16 @@
 import scrapy
 
-#TODO: Accept args for page limit and offset. 
-#TODO: Start thinking about pitchfork, subpop scraping strategy.
-
-#NOTE: Subpop and capturedtracks use the same scraping strategy. (/news/pageNum)
+# TODO: Accept args for page limit and offset. 
+# TODO: Make one base class spider and have each site specific spider 
+# implement its own parse method
 
 class CTSpider(scrapy.Spider):
     name = 'capturedtracks'
     start_urls = ['https://capturedtracks.com/news/']
     
-    # Keep note of the strategies used for each website,
-    # they'll change as we go along!
+    def __init__(self, follow=None, *args, **kwargs): 
+        super(CTSpider, self).__init__(*args, **kwargs)
+        self.follow = follow
     
     def parse(self, response):
         print('Parsing webpage...')
@@ -27,7 +27,8 @@ class CTSpider(scrapy.Spider):
                 "preview" : item.xpath('.//div[@class="news-item--preview"]/p/text()').get(),
             }
         print('------------- Done parsing -------------')
-        next_page = response.xpath('//div[@class="wrapper"]/a/@href').get()
-        if next_page:
-            yield response.follow(next_page, callback=self.parse)
+        if self.follow:
+            next_page = response.xpath('//div[@class="wrapper"]/a/@href').get()
+            if next_page:
+                yield response.follow(next_page, callback=self.parse)
 

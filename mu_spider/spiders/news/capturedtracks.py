@@ -27,7 +27,7 @@ class CTSpider(scrapy.Spider):
                 "preview" : item.xpath('.//div[@class="news-item--preview"]/p/text()').get(),
             }
         print('------------- Done parsing -------------')
-        # next_page = response.xpath('//div[@class="wrapper"]/a/@href').get()
-        # if next_page:
-            # yield response.follow(next_page, callback=self.parse)
+        next_page = response.xpath('//div[@class="wrapper"]/a/@href').get()
+        if next_page:
+            yield response.follow(next_page, callback=self.parse)
 

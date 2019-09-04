@@ -41,7 +41,7 @@ class SubpopSpider(scrapy.Spider):
                 "preview" : ws.join([re.sub("[\r\n\t]", "", st) for st in item.xpath('./*[not(self::header)]/descendant::text()').getall()]),
             }
         print('------------- Done parsing -------------')
-        # next_page = response.xpath('//div[@class="pagination"]/span[@class="next"]/a/@href').get()
-        # if next_page:
-            # yield response.follow(next_page, callback=self.parse)
+        next_page = response.xpath('//div[@class="pagination"]/span[@class="next"]/a/@href').get()
+        if next_page:
+            yield response.follow(next_page, callback=self.parse)
 

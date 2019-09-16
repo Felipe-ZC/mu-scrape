@@ -5,7 +5,7 @@ import scrapy
 # implement its own parse method
 
 class CTSpider(scrapy.Spider):
-    name = 'capturedtracks'
+    name = 'capturedtracks_news'
     start_urls = ['https://capturedtracks.com/news/']
     
     def __init__(self, follow=None, *args, **kwargs): 

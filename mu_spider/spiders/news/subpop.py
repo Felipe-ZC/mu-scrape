@@ -4,7 +4,7 @@ import scrapy
 import re
 
 class SubpopSpider(scrapy.Spider):  
-    name = 'subpop' 
+    name = 'subpop_news' 
     start_urls = ['https://www.subpop.com/news/']
     
     def __init__(self, follow=None, *args, **kwargs): 
@@ -25,8 +25,8 @@ class SubpopSpider(scrapy.Spider):
                 "title" :item.xpath('.//header/h2/a/text()').get(),
                 # TODO: Filter words that are not alpha numeric (escape sequences)
                 # TODO: Date is prefixed with a ':', lets get rid of it
-                "date" : item.xpath('.//header/p/text()').getall(), 
-                #"date" : ws.join([re.sub("^:","", st.strip()) for st in item.xpath('.//header/p/text()').getall()]).strip(),
+                # "date" : item.xpath('.//header/p/text()').getall(), 
+                "date" : ws.join([re.sub("^:","", st.strip()) for st in item.xpath('.//header/p/text()').getall()]).strip(),
                 # NOTE: There are <span> tags after some of the <p> elements for preview
                 # elements which our path is not accounting for.
                 # TODO: Change this xpath to select any tag with a path ending in text()

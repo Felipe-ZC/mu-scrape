@@ -96,4 +96,4 @@ FEED_CUSTOM_DIR='{}/mu_spider/fout'.format(PROJECT_DIR)
 # Used to customize the encoding used when writing items to a file
 FEED_EXPORT_ENCODING = 'utf-8'
 FEED_FORMAT = 'jsonlines'
-FEED_URI = 'file://{}/%(name)s.jl'.format(FEED_CUSTOM_DIR)
+FEED_URI = 'file://{}/%(time)s/%(name)s.jl'.format(FEED_CUSTOM_DIR)

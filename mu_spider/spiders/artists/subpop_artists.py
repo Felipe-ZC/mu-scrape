@@ -13,17 +13,16 @@ class SubpopSpider(scrapy.Spider):
     
     def parse(self, response):
         print('Parsing webpage...')
-        # print(response)
+        print(response)
         data = response.xpath('//section[@class="alpha-list"]')
-        # print(data)
+        ws = ' '
         for item in data:
             print('------------- Parsing article -------------')
-            # Parse all artists in each alpha list
-            alpha_artists = item.xpath(".//ul/li/a/text()").getall();
-            print(alpha_artists)
+            print(item.getall())
             #TODO: Think of more info to pull for artists... 
             yield {
-                "artists": item.xpath(".//ul/li/a/text()").getall(),
+                "name": item.xpath('.//header/h2/a/text()').get(),
+                "label": "Subpop"
             }
         print('------------- Done parsing -------------')
         #TODO: Find a way to use case for link following on artists page or remove this... 

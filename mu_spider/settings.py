@@ -90,7 +90,7 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 #NOTE: Custom settings used to indicate feed output...
-PROJECT_DIR='/home/zubuddy/projects/mu_scrape/src/mu_spider'
+PROJECT_DIR='/home/zubuddy/projects/spydey/mu-scrape/'
 FEED_CUSTOM_DIR='{}/mu_spider/fout'.format(PROJECT_DIR)
 
 # Used to customize the encoding used when writing items to a file

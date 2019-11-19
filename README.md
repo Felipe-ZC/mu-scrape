@@ -9,6 +9,13 @@ The information mu-scrape retrieves as of now is:
 - WIP:
 	- Full news articles
 	- Artist names
+ 
+#### Current concernts
+
+1) How can we ensure that our spiders are parsing each webpage correctly?
+2) How do you we track changes in the webpages we scrape?
+3) How do we stay annonymous?
+4) Where should we store the data gathered from scraping? 
 
 #### Avoid getting banned
 

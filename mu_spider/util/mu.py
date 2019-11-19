@@ -3,16 +3,19 @@ from scrapy.utils.project import get_project_settings
 from shutil import rmtree
 import argparse
 
-parser = argparse.ArgumentsParser(description="A utility to run the spiders in this project.")
+#TODO: Argument for deleting all files in output folder before scraping...
 
-# parser.add_argument('--f', dest='follow')
+parser = argparse.ArgumentParser(description='A utility to run the spiders in this project.')
+parser.add_argument('--f', dest='follow', action='store_true')
+args = parser.parse_args()
 
 settings = get_project_settings()
 process = CrawlerProcess(settings)
 
-#note: delete old output dir before crawling...
-print("Runnings all spiders...")
-#todo: get all spiders an run a loop here to crawl dynamically...
-process.crawl('subpop_news', follow)
-process.crawl('capturedtracks_news')
+print('Running all spiders...')
+process.crawl('subpop_news', args.follow)
+process.crawl('capturedtracks_news', args.follow)
+process.crawl('subpop_artists')
+process.crawl('capturedtracks_artists')
+
 process.start() # the script will block here until the crawling is finished

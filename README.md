@@ -2,20 +2,25 @@
 
 (Pretty vague)
 
-mu-scrape can be used to retrieve information from various music related websites.
-The information mu-scrape retrieves as of now is:
+Scrapes news articles from music blogs and other music related websites.
+Finds a current list of artists from select record labels.  
 
-- Previews of news articles 
 - WIP:
 	- Full news articles
-	- Artist names
+	- More artist names 
  
 #### Current concernts
 
 1) How can we ensure that our spiders are parsing each webpage correctly?
 2) How do you we track changes in the webpages we scrape?
 3) How do we stay annonymous?
-4) Where should we store the data gathered from scraping? 
+	- Use Privoxy to route scrapy HTTP traffic through the Tor network.
+	- HTTP traffic from scrapy is routed through Privoxy, which forwards this stream to Tor.
+	- Setup Tor locally & Privoxy locally [Use this link for help!](https://dm295.blogspot.com/2016/02/tor-ip-changing-and-web-scraping.html)
+	- By setting our locally configured Privoxy server as an HTTP proxy for our scrapy spiders, we can scrapye anonymously.
+ 
+4) Where should we store the data gathered from scraping?
+	- MongoDB (Atlas) 
 
 #### Avoid getting banned
 

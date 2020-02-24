@@ -20,7 +20,7 @@ MONGO_URI = os.environ["MONGODB_URI"]
 MONGO_DATABASE = os.environ["MONGODB_NAME"]
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64; rv:7.0.1) Gecko/20100101 Firefox/7.7'
+USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64; rv:7.0.1) Gecko/20100101 Firefox/7.7'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -31,7 +31,7 @@ ROBOTSTXT_OBEY = True
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-# DOWNLOAD_DELAY = 0.5 
+DOWNLOAD_DELAY = 2 
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -68,9 +68,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-   'mu_spider.pipelines.DataPipeline': 300,
-}
+# ITEM_PIPELINES = {
+   # 'mu_spider.pipelines.DataPipeline': 300,
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

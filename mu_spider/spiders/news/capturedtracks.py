@@ -13,8 +13,8 @@ class CTSpider(CrawlSpider):
     start_urls = ['https://capturedtracks.com/news/']
 
     rules = (
-        Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[text() = "Read More..."]')), callback="parse_items", follow= True),
-        # Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[text() = "Read More..."]','//a[text() = "Load More"]')), callback="parse_items", follow= True),
+        # Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[text() = "Read More..."]')), callback="parse_items", follow= True),
+        Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[text() = "Read More..."]','//a[text() = "Load More"]')), callback="parse_items", follow= True),
     )
  
     def __init__(self, follow=None, *args, **kwargs): 
@@ -25,6 +25,7 @@ class CTSpider(CrawlSpider):
         print('Parsing webpage...')
         media = response.xpath('//img/@data-src | //iframe/@src')
         data = response.xpath('//article')
+        ws = ' '
         # Only parse full articles...
         if(re.match('https://capturedtracks.com/news/page/[0-9]/', response.url) == None):
             for item in data:
@@ -34,7 +35,7 @@ class CTSpider(CrawlSpider):
                 yield {
                     "title": item.xpath('.//h1[@class="article--title"]/text()').get(),
                     "date": item.xpath('.//time[@class="article--date"]/text()').get(),
-                    "content": item.xpath('.//div[@class="article--content"]').getall(),
+                    "content": ws.join(item.xpath('.//div[@class="article--content"]/p/text()').getall()),
                     "media": media.getall(),
                 }
             print('------------- Done parsing -------------')

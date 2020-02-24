@@ -9,7 +9,7 @@ Finds a current list of artists from select record labels.
 	- Full news articles
 	- More artist names 
  
-#### Current concernts
+#### Current concerns
 
 1) How can we ensure that our spiders are parsing each webpage correctly?
 2) How do you we track changes in the webpages we scrape?

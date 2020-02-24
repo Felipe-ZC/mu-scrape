@@ -17,7 +17,7 @@ class CTSpider(scrapy.Spider):
         data = response.xpath('//article')
         print('Found ' + str(len(data)) + ' articles')
         for item in data:
-            print('------------- Parsing element {} -------------')
+            print('------------- Parsing element -------------')
             print(item.getall())
             #TODO: xpath: .// vs //
             yield {

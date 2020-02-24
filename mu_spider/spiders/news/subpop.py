@@ -2,6 +2,7 @@
 
 import scrapy
 import re
+import os
 
 class SubpopSpider(scrapy.Spider):  
     name = 'subpop_news' 
@@ -45,5 +46,6 @@ class SubpopSpider(scrapy.Spider):
         if self.follow:
             next_page = response.xpath('//div[@class="pagination"]/span[@class="next"]/a/@href').get()
             if next_page:
+                # yield response.follow(next_page, callback=self.parse, meta={'proxy' : os.environ['scrapy_http_proxy']})
                 yield response.follow(next_page, callback=self.parse)
 

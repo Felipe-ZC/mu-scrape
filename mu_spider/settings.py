@@ -9,14 +9,18 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+import os
+
 BOT_NAME = 'mu_spider'
 
 SPIDER_MODULES = ['mu_spider.spiders']
 NEWSPIDER_MODULE = 'mu_spider.spiders'
 
+MONGO_URI = os.environ["MONGODB_URI"]
+MONGO_DATABASE = os.environ["MONGODB_NAME"]
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'news_spider (+http://www.yourdomain.com)'
+# USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64; rv:7.0.1) Gecko/20100101 Firefox/7.7'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -27,7 +31,7 @@ ROBOTSTXT_OBEY = True
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-# DOWNLOAD_DELAY = 3
+# DOWNLOAD_DELAY = 0.5 
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -52,10 +56,10 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'news_spider.middlewares.NewsSpiderDownloaderMiddleware': 543,
-#}
-
+DOWNLOADER_MIDDLEWARES = {
+    'mu_spider.middlewares.ProxyCheckMiddleware': 2, 
+    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 3
+}
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
 #EXTENSIONS = {
@@ -64,9 +68,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'news_spider.pipelines.NewsSpiderPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'mu_spider.pipelines.DataPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

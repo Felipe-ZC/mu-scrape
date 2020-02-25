@@ -14,6 +14,7 @@ class CTSpider(CrawlSpider):
 
     rules = (
         # Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[text() = "Read More..."]')), callback="parse_items", follow= True),
+        # Load all articles...
         Rule(LinkExtractor(allow=(), restrict_xpaths=('//a[text() = "Read More..."]','//a[text() = "Load More"]')), callback="parse_items", follow= True),
     )
  
@@ -25,16 +26,16 @@ class CTSpider(CrawlSpider):
         print('Parsing webpage...')
         media = response.xpath('//img/@data-src | //iframe/@src')
         data = response.xpath('//article')
-        ws = ' '
+        ws = ' ' # TODO: Is there a better way of joining content?
         # Only parse full articles...
         if(re.match('https://capturedtracks.com/news/page/[0-9]/', response.url) == None):
             for item in data:
                 print('------------- Parsing element -------------')
                 print(item.getall())
-                #TODO: xpath: .// vs //
                 yield {
                     "title": item.xpath('.//h1[@class="article--title"]/text()').get(),
                     "date": item.xpath('.//time[@class="article--date"]/text()').get(),
+                    # TODO: Verify this xpath
                     "content": ws.join(item.xpath('.//div[@class="article--content"]/p/text()').getall()),
                     "media": media.getall(),
                 }

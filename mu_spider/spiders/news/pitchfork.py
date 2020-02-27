@@ -24,7 +24,7 @@ class PitchforkSpider(CrawlSpider):
         print(response)
         media = response.xpath('//img/@src | //iframe/@src')
         data = response.xpath('//div[@class="article-content"]')
-        time = response.xpath('.//time[@class="pub-date"]')
+        time = response.xpath('.//time[@class="pub-date"]/@datetime')
         ws = ' '
         print('html content is')
         if(re.match(r'\?page=\d$',response.url) == None):

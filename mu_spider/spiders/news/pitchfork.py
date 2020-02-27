@@ -10,7 +10,6 @@ from scrapy.link import Link
 class PitchforkSpider(CrawlSpider):  
     name = 'pitchfork_news'
     start_urls = ['https://www.pitchfork.com/news/?page=1']
-    
     rules = (
             Rule(LinkExtractor(restrict_xpaths=('//div[contains(@class, "news-module")]','//link[@rel="next"]'), tags=['a', 'link']), callback="parse_items", follow=False),
     )
@@ -25,17 +24,19 @@ class PitchforkSpider(CrawlSpider):
         print(response)
         media = response.xpath('//img/@src | //iframe/@src')
         data = response.xpath('//div[@class="article-content"]')
+        time = response.xpath('.//time[@class="pub-date"]')
         ws = ' '
         print('html content is')
         if(re.match(r'\?page=\d$',response.url) == None):
             for item in data:
-                print('------------- Parsing article -------------')
+                print('-----------time-- Parsing article -------------')
                 print(item.getall())
                 yield {
                     "title": item.xpath('.//header/h1/text()').get(),
                     "subtitle": item.xpath('.//header/p/text()').get(),
-                    # "content": item.xpath('.//div[@class="contents"]/p/text()').getall(),
-                    "text_content": ws.join(item.xpath('.//div[@class="contents"]//text()').getall()),
+                    "parsed_content": ws.join(item.xpath('.//div[@class="contents"]//text()').getall()),
+                    "raw_content": ws.join(item.xpath('.//div[@class="contents"]').getall()),
+                    "publish_date": time.get(),
                     "media": media.getall(),
                 }
             print('------------- Done parsing -------------')

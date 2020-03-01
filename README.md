@@ -40,3 +40,5 @@ difficult and tricky, and may sometimes require special infrastructure.
 #### TODO
 
 - Pitchfork Spider breaks after 145 pages... (503 Error)
+- KEXP has anti-scraping measures, lets implement a scrapy-spash
+  solution to get past this. 

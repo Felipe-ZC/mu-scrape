@@ -1,7 +1,5 @@
 # mu-scrape
 
-(Pretty vague)
-
 Scrapes news articles from music blogs and other music related websites.
 Finds a current list of artists from select record labels.  
 

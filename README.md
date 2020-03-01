@@ -36,3 +36,5 @@ difficult and tricky, and may sometimes require special infrastructure.
 >    * use a pool of rotating IPs. For example, the free Tor project or paid services like ProxyMesh. An open source alternative is scrapoxy, a super proxy that you can attach your own proxies to.
 >    * use a highly distributed downloader that circumvents bans internally, so you can just focus on parsing clean pages. One example of such downloaders is Crawlera
 
+
+#### TODO

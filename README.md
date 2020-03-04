@@ -23,9 +23,26 @@ Finds a current list of artists from select record labels.
 
 # Setup
 
+[Install Python 3.7](https://www.python.org/downloads/) and make sure it is working by running:
+```
+python3 --version
+```
+
 ## Scrapy
 
-[Install scrapy](http://doc.scrapy.org/en/latest/intro/install.html#using-a-virtual-environment-recommended) inside a virtual environment. 
+[Install scrapy](http://doc.scrapy.org/en/latest/intro/install.html#using-a-virtual-environment-recommended) inside a virtual environment: 
+
+```
+# Create a new virtual environment
+python3 -m venv env
+
+# Activate new virtual environment
+source env/bin/activate
+
+# Install dependencies
+python -m pip install scrapy scrapy-splash pymongo
+```
+
 [Avoid getting banned](https://docs.scrapy.org/en/latest/topics/practices.html#avoiding-getting-banned) while using Scrapy!
 
 ## Tor 
@@ -69,7 +86,7 @@ traffic through Tor:
 forward-socks5 / localhost:9050 .
 ```
 
-## (Optional) Test Tor/Privoxy setup in python 
+###### (Optional) Test Tor/Privoxy setup in python 
 
 Install stem:
 
@@ -149,11 +166,13 @@ Use the following [blog post](https://blog.scrapinghub.com/scrapy-proxy) for ref
 
 ## scrapy-splash install docs
 
-[Splash](https://splash.readthedocs.io/en/latest/index.html) is a JS rendering engine, includes an HTTP API.
+[Splash](https://splash.readthedocs.io/en/latest/index.html) is a JS rendering engine, includes an HTTP API.\
 [scrapy-splash](https://github.com/scrapy-plugins/scrapy-splash) is a scrapy plugin that provides integration with Splash.
 
 ## Splash HTTP proxy setup 
 
+###### (Optional) Pymongo setup
+ 
 ## Current concerns
 
 1) How can we ensure that our spiders are parsing each webpage correctly?

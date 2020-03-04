@@ -3,6 +3,24 @@
 Scrapes news articles from music blogs and other music related websites.
 Finds a current list of artists from select record labels.  
 
+## TODO
+
+- WIP:
+	- Full news articles
+	- More artist names
+	- Docker container
+- Create requirments file for venv python dependencies!
+- Change name of proxy middleware...
+- Add setup docs for Mongo & pymongo...
+- Pitchfork Spider breaks after 145 pages... (503 Error)
+- Add index to README
+- Containerzie this application
+	- Tor
+	- Privoxy
+	- Splash
+	- Scrapy
+	- Python 3.7
+
 # Setup
 
 ## Scrapy
@@ -135,24 +153,6 @@ Use the following [blog post](https://blog.scrapinghub.com/scrapy-proxy) for ref
 [scrapy-splash](https://github.com/scrapy-plugins/scrapy-splash) is a scrapy plugin that provides integration with Splash.
 
 ## Splash HTTP proxy setup 
-
-## TODO
-
-- WIP:
-	- Full news articles
-	- More artist names
-	- Docker container
-- Create requirments file for venv python dependencies!
-- Change name of proxy middleware...
-- Add setup docs for Mongo & pymongo...
-- Pitchfork Spider breaks after 145 pages... (503 Error)
-- Refactor README
-- Containerzie this application
-	- Tor
-	- Privoxy
-	- Splash
-	- Scrapy
-	- Python 3.7
 
 ## Current concerns
 

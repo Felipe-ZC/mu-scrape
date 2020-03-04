@@ -89,7 +89,7 @@ def makeReq(url):
 
 def renew_connection():
     with Controller.from_port(port = 9051) as controller:
-        controller.authenticate(password = 'dopeorder45')
+        controller.authenticate(password = 'mypassword')
         controller.signal(Signal.NEWNYM)
         controller.close()
 

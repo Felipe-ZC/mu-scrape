@@ -5,7 +5,13 @@ Finds a current list of artists from select record labels.
 
 # Setup
 
+## Scrapy
+
+[Install scrapy](http://doc.scrapy.org/en/latest/intro/install.html#using-a-virtual-environment-recommended) inside a virtual environment. 
+[Avoid getting banned](https://docs.scrapy.org/en/latest/topics/practices.html#avoiding-getting-banned) while using Scrapy!
+
 ## Tor 
+
 Install [Tor](https://www.torproject.org/docs/tor-doc-unix.html.en) 
 
 Create a hashed password to enable authentication on Tor's ControlPort:
@@ -34,6 +40,7 @@ sudo systemctl restart tor-master.service
 ```
 
 ## Privoxy
+
 Install [Privoxy](https://www.privoxy.org/) 
 
 Edit Privoxy's config file located at /etc/privoxy/config
@@ -96,6 +103,9 @@ Each response SHOULD contain a new IP addresss.
 Try increasing the number of seconds in time.sleep() 
 if too many responses contain the same IP address.  
 
+## Configure Scrapy to use Privoxy
+
+
 ## scrapy-splash install docs
 
 [Splash](https://splash.readthedocs.io/en/latest/index.html) is a JS rendering engine, includes an HTTP API.
@@ -104,6 +114,9 @@ if too many responses contain the same IP address.
 ## Splash HTTP proxy setup 
 
 ## TODO
+
+- Create requirments file for venv python dependencies!
+- Change name of proxy middleware...
 
 - WIP:
 	- Full news articles
@@ -130,19 +143,3 @@ if too many responses contain the same IP address.
  
 4) Where should we store the data gathered from scraping?
 	- MongoDB (Atlas) 
-
-## Avoid getting banned
-
-From the scrapy docs:
-
->Some websites implement certain measures to prevent bots from crawling them,
-with varying degrees of sophistication. Getting around those measures can be
-difficult and tricky, and may sometimes require special infrastructure. 
->
-> Here are some tips to keep in mind when dealing with these kinds of sites:
->    * rotate your user agent from a pool of well-known ones from browsers (google around to get a list of them)
->    * disable cookies (see COOKIES_ENABLED) as some sites may use cookies to spot bot behaviour
->    * use download delays (2 or higher). See DOWNLOAD_DELAY setting.
->    * if possible, use Google cache to fetch pages, instead of hitting the sites directly
->    * use a pool of rotating IPs. For example, the free Tor project or paid services like ProxyMesh. An open source alternative is scrapoxy, a super proxy that you can attach your own proxies to.
->    * use a highly distributed downloader that circumvents bans internally, so you can just focus on parsing clean pages. One example of such downloaders is Crawlera

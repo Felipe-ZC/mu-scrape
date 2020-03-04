@@ -23,7 +23,7 @@ Finds a current list of artists from select record labels.
 
 # Setup
 
-## Scrapy
+#### Scrapy
 
 [Install scrapy](http://doc.scrapy.org/en/latest/intro/install.html#using-a-virtual-environment-recommended) inside a virtual environment. 
 [Avoid getting banned](https://docs.scrapy.org/en/latest/topics/practices.html#avoiding-getting-banned) while using Scrapy!

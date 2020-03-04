@@ -51,7 +51,7 @@ traffic through Tor:
 forward-socks5 / localhost:9050 .
 ```
 
-## (Optional) Test Tor/Privoxy setup
+## (Optional) Test Tor/Privoxy setup in python 
 
 Install stem:
 
@@ -105,6 +105,29 @@ if too many responses contain the same IP address.
 
 ## Configure Scrapy to use Privoxy
 
+The [HttpProxyMiddleware](https://docs.scrapy.org/en/latest/topics/downloader-middleware.html#module-scrapy.downloadermiddlewares.httpproxy)
+outes requests through an http proxy by setting a meta value (proxy) on each Request object.
+
+Create a custom middleware that sets a proxy value for each request:
+
+```
+# 8118 = Privoxy's default port
+class ProxyMiddleware(object):
+    def process_request(self, request, spider):
+        request.meta["proxy"] = "http://127.0.0.1:8118"
+``` 
+
+Enable both HttpProxyMiddleware and custom middleware, set custom middleware to run BEFORE
+HttpProxyMiddleware:
+
+```   
+DOWNLOADER_MIDDLEWARES = {
+    'my_spider.middlewares.ProxyMiddleware': 2, 
+    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 3
+}
+```
+
+Use the following [blog post](https://blog.scrapinghub.com/scrapy-proxy) for reference.
 
 ## scrapy-splash install docs
 
@@ -115,13 +138,13 @@ if too many responses contain the same IP address.
 
 ## TODO
 
-- Create requirments file for venv python dependencies!
-- Change name of proxy middleware...
-
 - WIP:
 	- Full news articles
 	- More artist names
- 
+	- Docker container
+- Create requirments file for venv python dependencies!
+- Change name of proxy middleware...
+- Add setup docs for Mongo & pymongo...
 - Pitchfork Spider breaks after 145 pages... (503 Error)
 - Refactor README
 - Containerzie this application
@@ -140,6 +163,5 @@ if too many responses contain the same IP address.
 	- HTTP traffic from scrapy is routed through Privoxy, which forwards this stream to Tor.
 	- Setup Tor locally & Privoxy locally [Use this link for help!](https://dm295.blogspot.com/2016/02/tor-ip-changing-and-web-scraping.html)
 	- By setting our locally configured Privoxy server as an HTTP proxy for our scrapy spiders, we can scrape anonymously.
- 
 4) Where should we store the data gathered from scraping?
 	- MongoDB (Atlas) 

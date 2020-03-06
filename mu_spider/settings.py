@@ -19,6 +19,10 @@ NEWSPIDER_MODULE = 'mu_spider.spiders'
 MONGO_URI = os.environ["MONGODB_URI"]
 MONGO_DATABASE = os.environ["MONGODB_NAME"]
 
+SPLASH_URL = 'http://0.0.0.0:8050'
+DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64; rv:7.0.1) Gecko/20100101 Firefox/7.7'
 
@@ -50,15 +54,18 @@ DOWNLOAD_DELAY = 1
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
-#    'news_spider.middlewares.NewsSpiderSpiderMiddleware': 543,
-#}
+SPIDER_MIDDLEWARES = {
+    'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-    'mu_spider.middlewares.ProxyCheckMiddleware': 2, 
-    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 3
+    # 'mu_spider.middlewares.ProxyCheckMiddleware': 2, 
+    # 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 3
+    'scrapy_splash.SplashCookiesMiddleware': 723,
+    'scrapy_splash.SplashMiddleware': 725,
+    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
 }
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -68,9 +75,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-   'mu_spider.pipelines.DataPipeline': 300,
-}
+# ITEM_PIPELINES = {
+   # 'mu_spider.pipelines.DataPipeline': 300,
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

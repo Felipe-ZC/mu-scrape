@@ -41,4 +41,7 @@ difficult and tricky, and may sometimes require special infrastructure.
 
 - Pitchfork Spider breaks after 145 pages... (503 Error)
 - KEXP has anti-scraping measures, lets implement a scrapy-spash
-  solution to get past this. 
+  solution to get past this.
+- Looks like the issue is with Tor, Privoxy by itself works just fine,
+	try and find a solution for this. Maybe configure Tor to act as an
+	HTTP proxy instead of using Privoxy + Tor? 

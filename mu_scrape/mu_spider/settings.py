@@ -9,15 +9,15 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-import os
+from os import environ
 
 BOT_NAME = 'mu_spider'
 
 SPIDER_MODULES = ['mu_spider.spiders']
 NEWSPIDER_MODULE = 'mu_spider.spiders'
 
-MONGO_URI = os.environ["MONGODB_URI"]
-MONGO_DATABASE = os.environ["MONGODB_NAME"]
+MONGO_URI = environ.get("MONGODB_URI")
+MONGO_DATABASE = environ.get("MONGODB_NAME")
 
 SPLASH_URL = 'http://0.0.0.0:8050'
 DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
@@ -101,10 +101,14 @@ DOWNLOADER_MIDDLEWARES = {
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 #NOTE: Custom settings used to indicate feed output...
-PROJECT_DIR='/home/zubuddy/projects/spydey/mu-scrape/'
-FEED_CUSTOM_DIR='{}/mu_spider/fout'.format(PROJECT_DIR)
+FEEDS_DIR= environ.get('FEEDS_DIR') or '.'
 
-# Used to customize the encoding used when writing items to a file
-FEED_EXPORT_ENCODING = 'utf-8'
-FEED_FORMAT = 'jsonlines'
-FEED_URI = 'file://{}/%(time)s/%(name)s.jl'.format(FEED_CUSTOM_DIR)
+FEEDS = {
+    '{}/spider_out/%(name)s/%(time)s.json'.format(FEEDS_DIR): {
+        'format': 'json',
+        'encoding': 'utf8',
+        'store_empty': False,
+        'fields': None,
+        'indent': 4
+    }
+}

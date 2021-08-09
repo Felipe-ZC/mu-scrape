@@ -7,6 +7,7 @@ setup(name='mu-scrape',
       author='Felipe-ZC',
       license='MIT',
       install_reqs=[
-        'Scrapy'
-      ]
-      packages=['mu-scrape'])
+        'Scrapy',
+        'scrapy-splash'
+      ],
+      packages=['mu_scrape'])

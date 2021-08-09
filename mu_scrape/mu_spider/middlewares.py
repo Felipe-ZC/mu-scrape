@@ -6,7 +6,9 @@
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+
 # from scrapy import Headers
+
 
 class NewsSpiderSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
@@ -53,7 +55,7 @@ class NewsSpiderSpiderMiddleware(object):
             yield r
 
     def spider_opened(self, spider):
-        spider.logger.info('Spider opened: %s' % spider.name)
+        spider.logger.info("Spider opened: %s" % spider.name)
 
 
 class NewsSpiderDownloaderMiddleware(object):
@@ -100,10 +102,13 @@ class NewsSpiderDownloaderMiddleware(object):
         pass
 
     def spider_opened(self, spider):
-        spider.logger.info('Spider opened: %s' % spider.name)
+        spider.logger.info("Spider opened: %s" % spider.name)
+
 
 class ProxyCheckMiddleware(object):
     def process_request(self, request, spider):
-        request.headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64; rv:48.0) Gecko/20100101 Firefox/48.0'
+        request.headers[
+            "User-Agent"
+        ] = "Mozilla/5.0 (X11; Linux x86_64; rv:48.0) Gecko/20100101 Firefox/48.0"
         request.meta["proxy"] = "http://127.0.0.1:8118"
         print(request.headers)
